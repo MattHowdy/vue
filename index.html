@@ -3,105 +3,19 @@
 
 <head>
     <title></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.css">
+    <style type="text/css">body {padding-top: 50px}</style>
 </head>
 
-
-<style>
-    .color-red { color: blue}
-    .is-loading { background : yellow;}
-</style>
 <body>
 
-    <div id="root">
-
-        <h1>
-            {{ reversedMessage }}
-        </h1>
-
-        <h2> All Tasks </h2>
-        <ul>
-            <li v-for="task in tasks">{{ task.description }}</li>
-        </ul>
-
-
-        <h2> Incomplete Tasks </h2>
-        <ul>
-            <li v-for="task in incompleteTasks">{{ task.description }}</li>
-        </ul>
-        <!-- <h1 :class="className">Hello Vue</h1>
-        <button :disabled="isDisabled" :class="{ 'is-loading': isLoading}" @click="toggleClass" @mouseover="disableMe">Toggle me</button> -->
-
-
-        <!-- //BINDING => :title -->
-        <!-- <button :title="title">Hover Over Me</button> -->
-
-
-
-        <!-- <p>The value of the input is {{ message }}</p>
-        <ul>
-            <li v-for="name in names" v-text="name">{{ name }}</li>
-        </ul>
-
-        <input id="input" type="text" v-model="newName">
-        <button @click="addName"  id="button">Add</button> -->
-
+    <div id="root" class="container">
+        <message title="Hello worldy" body="Lorem ipsum"> </message>
+        
     </div>
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<script>
-
-    var app = new Vue({
-        el: '#root',
-        data : {
-            message : "hi Earth",
-            title : "beeing set by JS",
-            className : 'color-red',
-            isLoading : false,
-            isDisabled : false,
-            tasks : [
-                { description : "got to here..", completed: true},
-                { description : "got to there..", completed: true},
-                { description : "got to where..", completed: true},
-                { description : "got to now..", completed: false},
-                { description : "got to why..", completed: false}
-            ]
-        },
-
-        methods : {
-
-            toggleClass(){
-                this.isLoading = !this.isLoading
-            },
-
-            disableMe(){
-                this.isDisabled = !this.isDisabled
-            }
-        },
-        computed: {
-            reversedMessage(){
-                return this.message.split('').reverse().join('')
-            },
-            incompleteTasks(){
-                return this.tasks.filter(task=> !task.completed)
-            }
-        }
-
-        // data : {
-        //     newName : '',
-        //     message : "Hello world",
-        //     names : ['Bela', "Jani", "Akos", "Zsolt"]
-        // },
-
-        // methods: {
-        //     addName(){
-        //         this.names.push(this.newName)
-        //         this.newName = ""
-        //     } 
-        // }
-    })
-
-  
-</script>
+<script src="main.js"></script>
 
 </html>
