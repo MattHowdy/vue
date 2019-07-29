@@ -10,8 +10,11 @@
 <body>
 
     <div id="root" class="container">
-        <message title="Hello worldy" body="Lorem ipsum"> </message>
-        
+        <!-- <message title="Hello worldy" body="Lorem ipsum"> </message> -->
+        <modal v-if="showModal" @close="showModal=false">
+                <p> we insert Lorem stufff</p> 
+        </modal>
+        <button @click="showModal=true">Show modal</button>
     </div>
 </body>
 
