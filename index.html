@@ -8,14 +8,24 @@
 </head>
 
 <body>
-
     <div id="root" class="container">
-        <!-- <message title="Hello worldy" body="Lorem ipsum"> </message> -->
-        <modal v-if="showModal" @close="showModal=false">
-                <p> we insert Lorem stufff</p> 
-        </modal>
-        <button @click="showModal=true">Show modal</button>
+
+        <tabs>
+            <tab name="About" :selected="true">
+                <h1>Here is the contnwnkasdd </h1>
+            </tab>
+
+            <tab name="About us">
+                <h1>Here is the contnwnkasdd </h1>
+            </tab>
+
+            <tab name="Contact">
+                <h1>Here is the contnwnkasdd </h1>
+            </tab>
+        </tabs>
     </div>
+
+
 </body>
 
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>

@@ -1,82 +1,63 @@
-Vue.component('modal', {
+Vue.component('tabs', {
+    template: `
+    <div>
+        <div class="tabs">
+            <ul>
 
-    template:  `
-    <div class="modal is-active">
-        <div class="modal-background"></div>
-        <div class="modal-content">
-            <div class="box">
-                <slot></slot>
-            </div>
+                <li v-for="tab in tabs" :class="{ 'is-active' : tab.isActive}">
+                    <a :href="tab.href" @click="selectTab(tab)">{{ tab.name }} </a>
+                </li>
+            </ul>
         </div>
-        <button class="modal-close is-large" aria-label="close" @click="$emit('close')"></button>
-    </div>`
+        
+        <div class="tabs-details">
+            <slot></slot>
+        </div>
+    </div>
+    `,
+    data(){
+        return { tabs: []}
+    }
+    ,
+    created(){
+        this.tabs = this.$children
+    },
+    methods:{
+        selectTab(selectedTab){
+            this.tabs.forEach( tab=>{
+                tab.isActive = (tab.name == selectedTab.name)
+            })
+        }
+        
+    }
+
 })
 
 
-Vue.component('message', {
-
-    props : ['title', 'body'],
+Vue.component('tab', {
+    template: `
+        <div v-show="isActive"><slot></slot></div>
+    `,
+    props: {
+        name: { required: true },
+        selected : {default : false},
+    },
     data(){
-        return{
-            isVisislbe: true
+        return {
+            isActive : false
         }
     },
-    template: `
-        <article class="message" v-show="isVisislbe">
-            <div class="message-header">
-                {{ title }}
-                <button type="button" @click="isVisislbe=false">x</button>
-            </div>
-            
-            <div class="message-body">
-                {{ body }}
-            </div>
-        </article>
-        `,
-
-    // methods:{
-    //     hideModal(){
-    //         this.isVisislbe = false
-    //     }
-    // }
-    
-})
-
-Vue.component('task-list', {
-    template : `
-    <div>
-        <task v-for="task in tasks">{{task.task}}</task>
-    </div>`,
-
-    data(){
-        return {
-            tasks: [
-                { task: "Go to here..", complete: true},
-                { task: "Go to there..", complete: false},
-                { task: "Go to where..", complete: false},
-                { task: "Go to why..", complete: false},
-                { task: "Go to heil..", complete: false},
-            ]
+    computed:{
+        href(){
+            return '#' + this.name.toLowerCase().replace(/ /g, '-')
         }
+    },
+    mounted(){
+        this.isActive = this.selected
     }
 })
-
-Vue.component('task', {
-    template : '<li><slot>{{ message }}</slot></li>',
-
-    // FOR COMPONENTS DATA MUST BE A FUNCTION THAT RETURNS AN OBJECT CAUSE !!ITS NOT LINKED TO ANY SINGLE COMPONENT !!
-    data(){
-        return {
-            message : 'foobar'
-        }
-    } 
-})
-
-
 
 new Vue({
     el: '#root',
-    data : {
-        showModal:false
-    }
+
 })
